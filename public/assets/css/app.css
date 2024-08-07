@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Quicksand:wght@400;500;700&display=swap');
+html {
+    scroll-behavior: smooth;
+}
+body {
+    margin: 0;
+}
+.bg-style {
+    background-color: #f80d0d;
+    background-image: url("");
+    background-attachment: fixed;
+    background-size: cover;
+}
+.bg-custom {
+    background: #3C3A35;
+    background-image: url("public\assets\img\log.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment:fixed;
+}
+.font-inter {
+    font-family: 'Inter', sans-serif;
+}
+.font-quicksand {
+    font-family: 'Quicksand', sans-serif;
+}
+#mainNav, 
+#dashNav,
+.navbar-brand, 
+.nav-link,
+.bg-light, 
+input {
+    transition: 0.5s ease;
+}
+#mainNav.navbar-shrink,
+#dashNav.navbar-shrink {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-weight: 700;
+}
+#mainNav.navbar-shrink .navbar-brand,
+#dashNav.navbar-shrink .navbar-brand {
+    font-size: 1.5em;
+}
+.bg-blur {
+    backdrop-filter: blur(2px);
+    transition: 0.5s ease;
+}
+#homePage {
+    height: 60vh;
+    width: 100%;
+}
+#loginPage,
+#registerPage {
+    height: 70vh;
+    background-image: url("public\assets\img\log.png");
+    width: 100%;
+}
+#homePage img {
+    height: 23rem;
+    width: auto;
+}
+table img {
+    width: 65px !important;
+    background-image: url("public\assets\img\log.png");
+    height: 65px !important;
+    object-fit: contain;
+    
+}
+.btn-rounded {
+    border-radius: 25px;
+    padding: 6px 16px;
+}
+#listKandidat .card-img-top {
+    height: 200px;
+    width: auto;
+    object-fit: contain;
+}
+div.dataTables_filter input.form-control {
+    width: auto;
+}
+#image-preview {
+    height: 200px;
+    width: auto;
+    filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.5));
+}
+.form-switch.form-switch-lg {
+    margin-bottom: 1.5rem;
+}
+.form-switch.form-switch-lg .form-check-input {
+    height: 2rem;
+    width: calc(3rem + 0.75rem);
+    border-radius: 4rem;
+}
