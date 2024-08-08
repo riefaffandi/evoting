@@ -23,7 +23,7 @@ class DashboardController extends Controller
             'config' => Config::first()
         ]);
     }
-    
+
     public function voting_data()
     {
         return view('admin.votingdata');
@@ -55,7 +55,7 @@ class DashboardController extends Controller
     {
         return response()->json(Vote::get()->count());
     }
-    
+
     public function configuration()
     {
         return view('admin.configuration', [
@@ -131,7 +131,7 @@ class DashboardController extends Controller
                 'message' => 'You have no authrization to do this !!'
             ]);
         }
-        
+
     }
     public function resetCandidate()
     {
@@ -152,7 +152,7 @@ class DashboardController extends Controller
                 'message' => 'You have no authrization to do this !!'
             ]);
         }
-        
+
     }
     public function resetVote()
     {
@@ -167,6 +167,6 @@ class DashboardController extends Controller
                 'message' => 'You have no authrization to do this !!'
             ]);
         }
-        
+
     }
 }

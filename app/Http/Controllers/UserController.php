@@ -15,14 +15,14 @@ class UserController extends Controller
             'config' => $config->first()
         ]);
     }
-    
+
     public function announcement(Config $config)
     {
         return view('user.announcement', [
             'config' => $config->first()
         ]);
     }
-    
+
     public function voting(Config $config, Candidate $candidate)
     {
         $data = $config->first();
@@ -44,7 +44,7 @@ class UserController extends Controller
             ]);
         }
     }
-    
+
     public function result(Config $config)
     {
         $data = $config->first();
@@ -61,14 +61,14 @@ class UserController extends Controller
             ]);
         }
     }
-    
+
     public function profile()
     {
         return view('user.profile', [
             'profile' => auth()->user()
         ]);
     }
-    
+
     public function update_profile(Request $request)
     {
         $rules = $request->validate([
@@ -86,5 +86,9 @@ class UserController extends Controller
         $user->touch();
         $user->save();
         return back()->with('success', 'Profile Updated Successfully');
+    }
+
+    public function barcode() {
+        return view('user.barcode');
     }
 }

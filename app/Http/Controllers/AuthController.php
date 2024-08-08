@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AuthController extends Controller
 {
@@ -56,8 +61,16 @@ class AuthController extends Controller
             'password' => 'required|min:6|max:100',
             'birth_date' => 'required'
         ]);
+
+        $uuid = Str::uuid()->toString();
         $validated['password'] = bcrypt($request->password);
-        $user = User::create($validated);
+        $generateBarcode = QrCode::format('svg')->size(300)->generate($uuid);
+        $pathQrCode = Storage::put('/public/barcodes/barcode-'.$uuid.'.svg', $generateBarcode);
+
+        $data = array_merge($validated, ['uuid' => $uuid, 'qr_code' => '/barcodes/barcode-'.$uuid.'.svg']);
+
+        $user = User::create($data);
+
         if ($user) {
             // auth()->login($user);
             return redirect('/')->with('success', 'Berhasil Mendaftar, Selamat Datang '.$request->name);
@@ -75,5 +88,27 @@ class AuthController extends Controller
         auth()->guard('admin')->logout();
         session()->flush();
         return redirect('/')->with('success','Logout Successfully');
+    }
+
+    public function loginWithBarcode(Request $request)
+    {
+        $request->validate([
+            'uuid' => 'required|string',
+        ]);
+
+        $user = User::where('uuid', $request->uuid)->first();
+
+        if ($user) {
+            Auth::login($user);
+
+            return response()->json([
+                'success' => true,
+                'redirect' => route('homepage')
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
+        }
     }
 }

@@ -28,6 +28,7 @@ Route::get('/home', function ()
 Route::get('/pengumuman', [UserController::class, 'announcement'])->name('announcement');
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthController::class, 'show_login'])->name('login');
+    Route::post('/login/barcode', [App\Http\Controllers\AuthController::class, 'loginWithBarcode'])->name('login.with.barcode');
     Route::post('/login', [AuthController::class, 'check_login']);
     Route::get('/register', [AuthController::class, 'show_register'])->name('register');
     Route::post('/register', [AuthController::class, 'check_register']);
@@ -40,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pemilihan', [UserController::class, 'voting'])->name('voting');
     Route::post('/pilih_kandidat/{candidate}', [GlobalController::class, 'select_candidate'])->name('voting.candidate');
     Route::get('/hasil', [UserController::class, 'result'])->name('voting.result');
+    Route::get('/barcode', [App\Http\Controllers\UserController::class, 'barcode'])->name('barcode');
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::put('/profile', [UserController::class, 'update_profile']);
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
